@@ -419,12 +419,12 @@ def jacobi(A,b,x0,toll,it_max):
     d=np.diag(A)
     n=A.shape[0]
     invM=np.diag(1/d)
-    E=np.tril(A,-1)#to do
-    F=np.triu(A,1)#to do
-    N=-(E+F)#to do
-    T=np.dot(invM,N)#to do
+    E=np.tril(A,-1)                                             #TODO
+    F=np.triu(A,1)                                          #TODO
+    N=-(E+F)                                                    #TODO
+    T=np.dot(invM,N)                                            #TODO
     autovalori=np.linalg.eigvals(T)
-    raggiospettrale=np.max(np.abs(autovalori))#to do
+    raggiospettrale=np.max(np.abs(autovalori))                  #TODO
     print("raggio spettrale jacobi", raggiospettrale)
 
     # chicca teorica, bello da imparare
@@ -435,8 +435,8 @@ def jacobi(A,b,x0,toll,it_max):
     
     er_vet=[]
     while it<=it_max and errore>=toll:
-        x=(b+N@x0)/d.reshape(n,1)#to do
-        errore=np.linalg.norm(x-x0)/np.linalg.norm(x)#to do
+        x=(b+N@x0)/d.reshape(n,1)                               #TODO
+        errore=np.linalg.norm(x-x0)/np.linalg.norm(x)           #TODO
         er_vet.append(errore)
         x0=x.copy()
         it=it+1
@@ -445,23 +445,23 @@ def jacobi(A,b,x0,toll,it_max):
 
 def gauss_seidel(A,b,x0,toll,it_max):
     errore=1000
-    d=np.diag(A)#to do
-    D=np.diag(d)#to do
-    E=np.tril(A,-1)#to do
-    F=np.tril(A,1)#to do
-    M=D+E#to do
-    N=-F#to do
+    d=np.diag(A)                                                    #TODO
+    D=np.diag(d)                                                    #TODO
+    E=np.tril(A,-1)                                                 #TODO
+    F=np.tril(A,1)                                              #TODO
+    M=D+E                                                           #TODO
+    N=-F                                                            #TODO
     invM=np.linalg.inv(M) # aggiunta perche assente
-    T=invM@N#to do
+    T=invM@N                                                        #TODO
     autovalori=np.linalg.eigvals(T)
-    raggiospettrale=np.max(abs(autovalori))#to do
+    raggiospettrale=np.max(abs(autovalori))                         #TODO
     print("raggio spettrale Gauss-Seidel ",raggiospettrale)
     it=0
     er_vet=[]
-    while it<=it_max and errore>=toll:#to do
+    while it<=it_max and errore>=toll:                              #TODO
         temp = b-F@x0
-        x,flag=Lsolve(M,temp)#to do
-        errore=np.linalg.norm(x-x0)/np.linalg.norm(x)#to do
+        x,flag=Lsolve(M,temp)                                       #TODO
+        errore=np.linalg.norm(x-x0)/np.linalg.norm(x)               #TODO
         er_vet.append(errore)
         x0=x.copy()
         it=it+1
@@ -469,28 +469,28 @@ def gauss_seidel(A,b,x0,toll,it_max):
 
 def gauss_seidel_sor(A,b,x0,toll,it_max,omega):
     errore=1000
-    d=np.diag(A)#to do
-    D=np.diag(d)#to do
-    E=np.tril(A,-1)#to do
-    F=np.tril(A,1)#to do
+    d=np.diag(A)                                                    #TODO
+    D=np.diag(d)                                                    #TODO
+    E=np.tril(A,-1)                                                 #TODO
+    F=np.tril(A,1)                                              #TODO
     Momega=D+omega*E
     Nomega=(1-omega)*D-omega*F
-    T=np.dot(np.linalg.inv(Momega), Nomega)#to do
+    T=np.dot(np.linalg.inv(Momega), Nomega)                         #TODO
     autovalori=np.linalg.eigvals(T)
-    raggiospettrale=np.max(np.abs(autovalori))#to do
+    raggiospettrale=np.max(np.abs(autovalori))                      #TODO
     print("raggio spettrale Gauss-Seidel SOR ", raggiospettrale)
     
-    M=D+E#to do
-    N=-F#to do
+    M=D+E                                                           #TODO
+    N=-F                                                            #TODO
     it=0
     xold=x0.copy()
     xnew=x0.copy()
     er_vet=[]
     while it<=it_max and errore>=toll:
         temp=b-np.dot(F,xold)
-        xtilde,flag= Lsolve(M,temp) #to do
-        xnew=(1-omega)*xold+omega*xtilde#to do
-        errore=np.linalg.norm(xnew-xold)/np.linalg.norm(xnew)#to do
+        xtilde,flag= Lsolve(M,temp)                                 #TODO
+        xnew=(1-omega)*xold+omega*xtilde                            #TODO
+        errore=np.linalg.norm(xnew-xold)/np.linalg.norm(xnew)       #TODO
         er_vet.append(errore)
         xold=xnew.copy()
         it=it+1
@@ -511,8 +511,8 @@ def steepestdescent(A,b,x0,itmax,tol):
     x = x0
 
      
-    r = A@x-b #to do
-    p = -r #to do
+    r = A@x-b                                                       #TODO
+    p = -r                                                          #TODO
     it = 0
     nb=np.linalg.norm(b)
     errore=np.linalg.norm(r)/nb
@@ -522,20 +522,20 @@ def steepestdescent(A,b,x0,itmax,tol):
     vet_r.append(errore)
      
 # utilizzare il metodo del gradiente per trovare la soluzione
-    while it<itmax and errore>= tol: #to do
+    while it<itmax and errore>= tol:                                #TODO
         it=it+1
-        Ap=A@p #to do
+        Ap=A@p                                                      #TODO
        
-        alpha =-(r.T@p)/(p.T@Ap) # to do
+        alpha =-(r.T@p)/(p.T@Ap)                                    #TODO
                 
-        x = x + alpha*p #to do
+        x = x + alpha*p                                             #TODO
         
          
         vec_sol.append(x.copy())
-        r= r + alpha*Ap #to do
+        r= r + alpha*Ap                                             #TODO
         errore=np.linalg.norm(r)/nb
         vet_r.append(errore)
-        p = -r #to do
+        p = -r                                                      #TODO
         
     iterates_array = np.vstack([arr.T for arr in vec_sol])
     return x,vet_r,iterates_array,it
@@ -550,8 +550,8 @@ def conjugate_gradient(A,b,x0,itmax,tol):
    # inizializzare le variabili necessarie
     x = x0
     
-    r = A@x-b#to do
-    p = -r #to do
+    r = A@x-b                                                       #TODO
+    p = -r                                                          #TODO
     it = 0
     nb=np.linalg.norm(b)
     errore=np.linalg.norm(r)/nb
@@ -562,16 +562,16 @@ def conjugate_gradient(A,b,x0,itmax,tol):
 # utilizzare il metodo del gradiente coniugato per calcolare la soluzione
     while it<itmax and errore<tol: #to do
         it=it+1
-        Ap=A@p #to do A.dot(p)
+        Ap=A@p                                                      #TODO A.dot(p)
         alpha = -(r.T@p)/(r.T@Ap) #to do
-        x = x + alpha*p#to do
+        x = x + alpha*p                                             #TODO
         vec_sol.append(x.copy())
-        rtr_old=r.T@r#to do
-        r= r+alpha*Ap#to do
-        gamma=r.T@r/rtr_old #to do
+        rtr_old=r.T@r                                               #TODO
+        r= r+alpha*Ap                                               #TODO
+        gamma=r.T@r/rtr_old                                         #TODO
         errore=np.linalg.norm(r)/nb
         vet_r.append(errore)
-        p = -r+gamma*p #to do
+        p = -r+gamma*p                                              #TODO
    
     iterates_array = np.vstack([arr.T for arr in vec_sol])
     return x,vet_r,iterates_array,it
@@ -580,9 +580,9 @@ def conjugate_gradient(A,b,x0,itmax,tol):
 
 def eqnorm(A,b):
  
-    G=A.T@A                                     #TODO
+    G=A.T@A                                                         #TODO
     #cond = np.linalg.cond(G)
-    f=A.T@b                                     #TODO
+    f=A.T@b                                                         #TODO
     
     L=scipy.linalg.cholesky(G,lower=True)
     U=L.T
@@ -598,9 +598,9 @@ def eqnorm(A,b):
 def qrLS(A,b):
     n=A.shape[1]  # numero di colonne di A
     Q,R=scipy.linalg.qr(A)
-    h=Q.T#to do
+    h=Q.T                                                           #TODO
     x,flag = SolveTriangular.Usolve(R[0:n,:],h[0:n]) #to do
-    residuo=np.linalg.norm(h[n:])**2#to do
+    residuo=np.linalg.norm(h[n:])**2                                #TODO
     return x,residuo
 
 
@@ -630,14 +630,14 @@ def plagr(xnodi,j):
     xzeri=np.zeros_like(xnodi)
     n=xnodi.size
     if j==0:
-       xzeri==#to do 
+       xzeri==xnodi[1:n]                                        #TODO
     else:
-       xzeri=np.append(#to do )
+       xzeri=np.append(xnodi[0:j], xnodi[j+1:n])                #TODO
     
-    num= 
-    den= 
+    num= np.poly(xzeri)
+    den= np.polyval(num, xnodi[j])
     
-    p= 
+    p= num/den
     
     return p
 
@@ -645,12 +645,12 @@ def plagr(xnodi,j):
 
 def InterpL(x, y, xx):
      
-     n=#to do
-     m=#to do 
+     n=x.size                                                   #TODO
+     m=xx.size                                                  #TODO
      L=np.zeros((m,n))
-     for j #to do :
-        p=#to do 
-        L[:,j]=#to do 
+     for j in range(n) :                                        #TODO
+        p=plagr(x,j)                                            #TODO
+        L[:,j]=np.polyval(p,xx)                                 #TODO
     
     
-     return #to do 
+     return L@y                                                 #TODO
